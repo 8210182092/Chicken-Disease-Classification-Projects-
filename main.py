@@ -1,12 +1,6 @@
 from src.cnnClassifier import logger
 from src.cnnClassifier.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
-
-
-
-from pathlib import Path
-
-CONFIG_FILE_PATH = Path("config/config.yaml")
-PARAMS_FILE_PATH = Path("params.yaml")
+from src.cnnClassifier.pipeline.stage_02_prepare_base_model import PrepareBaseModelTrainingPipeline
 
 
 
@@ -23,3 +17,13 @@ except Exception as e:
 
 
 
+STAGE_NAME = "Prepare base model"
+try: 
+   logger.info(f"*******************")
+   logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+   prepare_base_model = PrepareBaseModelTrainingPipeline()
+   prepare_base_model.main()
+   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e
